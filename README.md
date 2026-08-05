@@ -68,34 +68,52 @@ Im Folgenden ein paar hilfreiche Kommandos (vorher ggf. `cd example-java`):
 
 - Version anzeigen:
 
-  ```shell
-  % mvn --version
+  ```sh
+  mvn --version
   ```
 
 - Bereinigt die von Maven während des Builds generierten Dateien und
   Verzeichnisse (bspw. das _target_-Verzeichnis):
 
-  ```shell
-  % mvn clean
+  ```sh
+  mvn clean
   ```
 
-- Führt alle oder ausgewählte Test-Klassen aus:
+- Führt Tests mit Maven aus:
 
-  ```shell
-  % mvn test
-  % mvn clean test
-  % mvn -Dtest=TestTown test
+  ```sh
+  # Run all tests
+  mvn test
+
+  # Remove previous build artifacts and run all tests
+  mvn clean test
+  ```
+
+- Führt gezielt ausgewählte Tests (Klassen, Methoden) aus:
+
+  ```sh
+  # Run a specific test class
+  mvn -Dtest=TestTown test
+
+  # Run multiple test classes
+  mvn -Dtest=TestTown,TestCity test
+
+  # Run a specific test method
+  mvn -Dtest=TestTown#testTownValues test
+
+  # Run tests matching a pattern
+  mvn -Dtest=*TownTest test
   ```
 
 - Kompiliert und erstellt ein Paket (bspw. JAR-Datei) aus den Quellcodedateien:
 
-  ```shell
-  % mvn package
+  ```sh
+  mvn package
   ```
 
 - Ausführen der erstellten JAR-Datei:
 
-  ```shell
+  ```console
   % java -cp target/example-1.0-SNAPSHOT.jar example.Main
   The town Dresden has 556780 residents.
   Town('Dresden', 556780)
@@ -131,29 +149,42 @@ Im Folgenden ein paar hilfreiche Kommandos (vorher ggf. `cd example-python`):
 
 - Version anzeigen:
 
-  ```shell
-  % python3 --version
+  ```sh
+  python3 --version
   ```
 
-- Führt ausgewählte Tests, Test-Klassen/-Methoden aus:
+- Führt automatisch gefundene Tests aus:
 
-  ```shell
-  % python3 -m unittest tests.test_town
-  % python3 -m unittest tests.test_town.TestTown
-  % python3 -m unittest tests.test_town.TestTown.test_town_values
+  ```sh
+  # Run tests using the default test discovery behavior
+  python3 -m unittest
+
+  # Discover tests recursively from the current directory
+  python3 -m unittest discover
+
+  # Discover tests in a specific directory
+  python3 -m unittest discover -s tests
+
+  # Discover tests in a specific directory with a specific filename pattern
+  python3 -m unittest discover -s tests -p "test_*.py"
   ```
 
-- Führt Tests aller oder ausgewählter Pakete/Dateien aus:
+- Führt gezielt ausgewählte Tests (Module, Klassen, Methoden) aus:
 
-  ```shell
-  % python3 -m unittest discover
-  % python3 -m unittest discover tests
-  % python3 -m unittest discover tests "test_*.py"
+  ```sh
+  # Run all tests in a test module
+  python3 -m unittest tests.test_town
+
+  # Run all test methods in a specific test class
+  python3 -m unittest tests.test_town.TestTown
+
+  # Run one specific test method
+  python3 -m unittest tests.test_town.TestTown.test_town_values
   ```
 
 - Ausführen mit:
 
-  ```shell
+  ```console
   % python3 main/main.py
   The town Dresden has 556780 residents.
   Town('Dresden', 556780)
