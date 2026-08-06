@@ -101,7 +101,7 @@ Dresden
   python3 -m unittest tests.test_town.TestTown
 
   # Run one specific test method
-  python3 -m unittest tests.test_town.TestTown.test_town_constructor_rejects_invalid_name
+  python3 -m unittest tests.test_town.TestTown.test_town_name_setter_rejects_invalid_name
   ```
 
 ## Testing Guidelines
@@ -117,7 +117,7 @@ test_<class><feature or method><expected behavior>
 Example:
 
 ```txt
-test_town_name_setter_sets_and_gets_correct_value
+test_town_name_setter_rejects_invalid_name
 │    │    │           │
 │    │    │           └── expected behavior
 │    │    └── feature or method being tested
