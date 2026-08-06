@@ -5,10 +5,10 @@ Actions][08-github-actions] im Fach Software Engineering II.
 
 [08-github-actions]: https://www.informatik.htw-dresden.de/~zirkelba/praktika/se/git-docs-collab/08-github-actions.html#_aufgabe_2_unit_tests
 
-Enthalten ist jeweils eine simple Anwendung mit Unit-Tests in **Java**
-([Maven], [JUnit]) und **Python** ([unittest]), bestehend aus einer `Town`-Klasse
-mit zugehörigen Unit-Tests. Diese sind dem Praktikum zu "Unit-Test mit Java und
-Python" entnommen.
+Enthalten sind einfache Anwendungen mit Unit-Tests in **Java**
+([Maven], [JUnit]) und **Python** ([unittest]). Beide Beispiele bestehen aus
+einer `Town`-Klasse mit zugehörigen Unit-Tests und stammen aus dem Praktikum
+"Unit-Tests mit Java und Python".
 
 [Maven]: https://maven.apache.org/
 [JUnit]: https://junit.org/junit5/docs/current/user-guide/
@@ -18,15 +18,15 @@ Python" entnommen.
 > Ein Test schlägt bewusst fehl, da dieser im Zuge der Aufgabenbearbeitung
 > angepasst wird.
 
-## Hinweise
+## Übungsprojekte
 
-Die Beispielprojekte für **Java** und **Python** liegen in jeweils getrennten
-Verzeichnissen mit erklärenden `README.md`-Dateien:
+Die Beispielprojekte für **Java** und **Python** befinden sich in getrennten
+Verzeichnissen und enthalten jeweils eine `README.md`-Datei mit Informationen:
 
-```txt
-├── example-java
-└── example-python
-```
+| Projekt                               | Beschreibung                                 |
+| ------------------------------------- | -------------------------------------------- |
+| [`example-java/`](/example-java/)     | Enthält die Java-Anwendung mit Unit-Tests.   |
+| [`example-python/`](/example-python/) | Enthält die Python-Anwendung mit Unit-Tests. |
 
-Für jedes Projekt werden im Laufe der Bearbeitung der Aufgaben die zugehörigen
-**GitHub Action Workflows** im Verzeichnis `.github/workflows/` angelegt.
+Für jedes Projekt werden im Laufe der Aufgabenbearbeitung die zugehörigen
+**GitHub Action Workflows** im Verzeichnis `.github/workflows/` erstellt.
