@@ -1,4 +1,4 @@
-package example;
+package town_example;
 
 public class Main {
 

@@ -29,12 +29,12 @@ example-java
 ├── src
 │   ├── main
 │   │   └── java
-│   │       └── example
+│   │       └── town_example
 │   │           ├── Main.java
 │   │           └── Town.java
 │   └── test
 │       └── java
-│           └── example
+│           └── town_example
 │               ├── TestMain.java
 │               └── TestTown.java
 ├── .gitignore
@@ -46,7 +46,7 @@ example-java
 | `pom.xml`       | Defines the Maven project configuration, dependencies, and build settings.                                                    |
 | `src/`          | Contains the source code and unit tests of the application.                                                                   |
 | `main/java/`    | Contains the application source code.                                                                                         |
-| `example/`      | Contains the Java package with the application code and tests.                                                                |
+| `town_example/` | Contains the Java package with the application code and tests.                                                                |
 | `Main.java`     | Contains the `main()` method used to run the application.                                                                     |
 | `Town.java`     | Contains the `Town` class representing a town with a name (`name`) and number of residents (`residents`) and related methods. |
 | `test/java/`    | Contains the unit tests for the application source code.                                                                      |
@@ -71,7 +71,7 @@ If you want to build the project without running tests:
 mvn package -DskipTests
 ```
 
-Start the application with `java -cp target/example-1.0-SNAPSHOT.jar example.Main`:
+Start the application with `java -cp target/town-example-0.1.0.jar example.Main`:
 
 ```console
 $ java -cp target/example-1.0-SNAPSHOT.jar example.Main

@@ -1,4 +1,4 @@
-package example;
+package town_example;
 
 /**
  * Represents a town with name and number of residents.
