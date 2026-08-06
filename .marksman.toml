@@ -1,0 +1,3 @@
+[code_action]
+# Heading levels to include when generating a Table of Contents
+toc.include = [2, 3, 4, 5, 6]
