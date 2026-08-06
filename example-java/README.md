@@ -1,7 +1,7 @@
 # Example Java
 
 A small Java learning project demonstrating object-oriented programming and
-unit testing with `?`.
+unit testing with `JUnit`.
 
 > [!WARNING]
 > Two tests intentionally fail. The errors are part of the exercise and should
@@ -109,38 +109,38 @@ Run specific tests (classes or methods):
 mvn -Dtest=TestTown test
 
 # Run multiple test classes
-mvn -Dtest=TestTown,TestCity test
+mvn -Dtest=TestTown,TestMain test
 
 # Run a specific test method
-mvn -Dtest=TestTown#testTownValues test
+mvn -Dtest=TestTown#setNameRejectsInvalidName test
 
 # Run test classes matching a pattern
-mvn -Dtest=*TestTown test
+# Quotes are required to avoid shell (globbing) expansion of the pattern.
+mvn '-Dtest=*TestTown' test
 ```
 
 ## Testing Guidelines
 
 ### Unit Test Naming Convention
 
-A common naming pattern for unit tests is:
+JUnit test methods are marked with the `@Test` annotation. Test methods can use
+descriptive `camelCase` names following a pattern such as:
 
 ```txt
-test_<class><feature or method><expected behavior>
+<feature or method><expected behavior>
 ```
+
+The expected behavior usually starts with a verb describing the tested behavior,
+such as `Returns`, `Updates`, `Sets`, or `Rejects`.
 
 Example:
 
 ```txt
-test_town_name_setter_sets_and_gets_correct_value
-│    │    │           │
-│    │    │           └── expected behavior
-│    │    └── feature or method being tested
-│    └── class under test
-└── required prefix for unittest test discovery
+setNameRejectsInvalidName()
+│      │
+│      └── expected behavior
+└── feature or method being tested
 ```
-
-The `test_` prefix is required by Python's `unittest` framework to
-discover and execute test methods.
 
 ### AAA Pattern (Arrange - Act - Assert)
 

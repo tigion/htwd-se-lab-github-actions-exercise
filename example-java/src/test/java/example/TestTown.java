@@ -1,13 +1,14 @@
 package example;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class TestTown {
   private static final String[] INVALID_NAMES = { null, "", " " };
@@ -22,7 +23,7 @@ class TestTown {
 
   // Runs before each test.
   @BeforeEach
-  void setUp() throws Exception {
+  void setUp() {
     testValue1Name = "Dresden";
     testValue1Residents = 556780;
     testValue2Name = "Leipzig";
@@ -31,7 +32,7 @@ class TestTown {
 
   // Runs after each test.
   @AfterEach
-  void tearDown() throws Exception {
+  void tearDown() {
   }
 
   // Runs once after all tests.

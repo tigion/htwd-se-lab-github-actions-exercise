@@ -1,40 +1,15 @@
 package example;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-
 class TestMain {
-
-  @BeforeAll
-  static void setUpBeforeClass() throws Exception {
-  }
-
-  @AfterAll
-  static void tearDownAfterClass() throws Exception {
-  }
-
-  @BeforeEach
-  void setUp() throws Exception {
-  }
-
-  @AfterEach
-  void tearDown() throws Exception {
-  }
-
-  @DisplayName("T01: Main function without unhandled Exception")
+  @DisplayName("T01: `main()` runs without throwing an exception")
   @Test
-  void test1_mainFunction() {
-    try {
-      Main.main(null);
-    } catch (Exception ex) {
-      fail("Exception ...");
-    }
-    assertTrue(true);
+  void mainRunsWithoutException() {
+    // Act & Assert
+    assertDoesNotThrow(() -> Main.main(new String[0]));
   }
 }
