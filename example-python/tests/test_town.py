@@ -1,88 +1,130 @@
 import unittest
 
-from main.town import Town
+from town_example.town import Town
 
 
 class TestTown(unittest.TestCase):
-    # before all tests
-    @classmethod
-    def setUpClass(cls):
-        cls.test_value1_name = "Dresden"
-        cls.test_value1_residents = 556780
-        cls.test_value2_name = "Leipzig"
-        cls.test_value2_residents = 593145
+    INVALID_NAMES = (None, "", "  ")
 
-    # after all tests
+    # Runs once before all tests.
     @classmethod
-    def tearDownClass(cls):
-        pass
+    def setUpClass(cls): ...
 
-    # before each test
+    # Runs before each test.
     def setUp(self):
-        pass
+        self.test_value1_name = "Dresden"
+        self.test_value1_residents = 556780
+        self.test_value2_name = "Leipzig"
+        self.test_value2_residents = 593145
 
-    # after each test
-    def tearDown(self):
-        pass
+    # Runs after each test.
+    def tearDown(self): ...
 
-    def test_town_values(self):
-        """T01: Set and get equals town name and residents"""
+    # Runs once after all tests.
+    @classmethod
+    def tearDownClass(cls): ...
 
-        # constructor equals get
+    def test_town_constructor_sets_and_gets_correct_values(self):
+        """T01: Constructor sets and gets correct values."""
+
+        # Arrange
         t = Town(self.test_value1_name, self.test_value1_residents)
+
+        # Act & Assert
         self.assertEqual(t.name, self.test_value1_name)
         self.assertEqual(t.residents, self.test_value1_residents)
-        # set equals get
+
+    def test_town_name_setter_sets_and_gets_correct_value(self):
+        """T02: Name setter sets and gets correct value."""
+
+        # Arrange
+        t = Town(self.test_value1_name, self.test_value1_residents)
+
+        # Act
         t.name = self.test_value2_name
-        t.residents = self.test_value2_residents
+
+        # Assert
         self.assertEqual(t.name, self.test_value2_name)
+
+    def test_town_residents_setter_sets_and_gets_correct_value(self):
+        """T03: Residents setter sets and gets correct value."""
+
+        # Arrange
+        t = Town(self.test_value1_name, self.test_value1_residents)
+
+        # Act
+        t.residents = self.test_value2_residents
+
+        # Assert
         self.assertEqual(t.residents, self.test_value2_residents)
 
-    def test_town_name_error_values(self):
-        """T02: Set correct town name
-        - name: cannot be null, empty or contain only spaces
+    def test_town_constructor_rejects_invalid_name(self):
+        """
+        T04: Constructor rejects invalid town names:
+        - None
+        - empty string
+        - whitespace only
         """
 
-        # constructor
-        self.assertRaises(ValueError, Town, None, self.test_value1_residents)
-        self.assertRaises(ValueError, Town, "", self.test_value1_residents)
-        self.assertRaises(ValueError, Town, "  ", self.test_value1_residents)
-        # set
-        t = Town(self.test_value1_name, self.test_value1_residents)
-        with self.assertRaises(ValueError):
-            t.name = None
-        with self.assertRaises(ValueError):
-            t.name = ""
-        with self.assertRaises(ValueError):
-            t.name = "  "
+        # Act & Assert
+        for name in self.INVALID_NAMES:
+            with self.assertRaises(ValueError):
+                Town(name, self.test_value1_residents)
 
-    def test_town_residents_error_value(self):
-        """T03: Set correct town residents
-        - residents: cannot be less 0
+    def test_town_name_setter_rejects_invalid_name(self):
+        """
+        T05: Setter rejects invalid town names:
+        - None
+        - empty string
+        - whitespace only
         """
 
-        # constructor equals get
-        t = Town(self.test_value1_name, -1)
-        self.assertFalse(t.residents < 0)
-        # set equals get
-        t.residents = -2
-        self.assertFalse(t.residents < 0)
-
-    def test_town_str(self):
-        """T04: Get correct town as human readable string"""
-
+        # Arrange
         t = Town(self.test_value1_name, self.test_value1_residents)
-        template = f"The town {self.test_value1_name} has {self.test_value1_residents} residents."
 
-        self.assertEqual(str(t), template)
+        # Act & Assert
+        for name in self.INVALID_NAMES:
+            with self.assertRaises(ValueError):
+                t.name = name
 
-    def test_town_repr(self):
-        """T05: Get correct town as object representation string"""
+    def test_town_constructor_rejects_negative_residents(self):
+        """T06: Constructor rejects negative residents."""
 
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            Town(self.test_value1_name, -1)
+
+    def test_town_residents_setter_rejects_negative_residents(self):
+        """T07: Setter rejects negative residents."""
+
+        # Arrange
         t = Town(self.test_value1_name, self.test_value1_residents)
-        template = f"Town({self.test_value1_name!r}, {self.test_value1_residents!r})"
 
-        self.assertEqual(repr(t), template)
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            t.residents = -1
+
+    def test_town_str_returns_human_readable_string(self):
+        """T08: Get correct town as human readable string."""
+
+        # Arrange
+        t = Town(self.test_value1_name, self.test_value1_residents)
+        expected = (
+            f"{self.test_value1_name} has {self.test_value1_residents} residents."
+        )
+
+        # Act, Assert
+        self.assertEqual(str(t), expected)
+
+    def test_town_repr_returns_object_representation(self):
+        """T09: Get correct town as object representation string."""
+
+        # Arrange
+        t = Town(self.test_value1_name, self.test_value1_residents)
+        expected = f"Town({self.test_value1_name!r}, {self.test_value1_residents!r})"
+
+        # Act, Assert
+        self.assertEqual(repr(t), expected)
 
 
 if __name__ == "__main__":

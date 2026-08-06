@@ -1,4 +1,13 @@
+# Python bytecode and cache files
+__pycache__/
+*.py[cod]
+
+# Python package metadata
+*.egg-info/
+
+# Virtual environments
+.venv/
+
+# Editor and operating system files
 *~
 .DS_Store
-__pycache__
-.venv/

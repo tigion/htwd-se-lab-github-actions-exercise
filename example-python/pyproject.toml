@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "town-example"
+version = "0.1.0"
+description = "A small Python learning project demonstrating object-oriented programming and unit testing."
+requires-python = ">=3.12"
+
+[tool.setuptools.packages.find]
+where = ["src"]

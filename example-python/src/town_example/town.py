@@ -17,10 +17,10 @@ class Town:
 
     @name.setter
     def name(self, value):
-        if value and not value.isspace():
-            self.__name = value
+        if isinstance(value, str) and value and not value.isspace():
+            self.__name = value.strip()
         else:
-            raise ValueError("Name cannot be null, empty or contain only white spaces.")
+            raise ValueError("Name must be a non-empty string.")
 
     @property
     def residents(self):
@@ -29,11 +29,16 @@ class Town:
 
     @residents.setter
     def residents(self, value):
+        if type(value) is not int:
+            raise ValueError("Residents must be an integer.")
+
+        # FIX: Add non-negative residents validation.
+
         self.__residents = value
 
     def __str__(self):
         """Returns a human readable string of the object."""
-        return f"The town {self.name} has {self.residents} residents."
+        return f"{self.name} has {self.residents} residents."
 
     def __repr__(self):
         """Returns a string representation of the object."""
