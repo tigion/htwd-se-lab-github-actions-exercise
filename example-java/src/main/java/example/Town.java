@@ -26,23 +26,24 @@ public class Town {
 
   public void setName(String name) {
     if (name == null || name.isBlank())
-      throw new IllegalArgumentException("Name cannot be null, empty or contain only white spaces.");
-    this.name = name;
+      throw new IllegalArgumentException("Name must be a non-empty string.");
+    this.name = name.strip();
   }
 
   public void setResidents(int residents) {
+    // FIX: Add non-negative residents validation.
+
     this.residents = residents;
   }
 
-  /** Returns the summarized information of the town. */
+  /** Returns human-readable town information. */
   public String getInfo() {
-    return "The town " + this.name + " has " + this.residents + " residents.";
+    return this.name + " has " + this.residents + " residents.";
   }
 
-  @Override
   /** Returns a string representation of the object. */
+  @Override
   public String toString() {
     return "Town('" + name + "', " + residents + ")";
   }
-
 }

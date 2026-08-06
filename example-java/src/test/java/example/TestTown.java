@@ -10,115 +10,137 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
 class TestTown {
+  private static final String[] INVALID_NAMES = { null, "", " " };
 
-  static String testValue1Name, testValue2Name;
-  static int testValue1Residents, testValue2Residents;
+  private String testValue1Name, testValue2Name;
+  private int testValue1Residents, testValue2Residents;
 
+  // Runs once before all tests.
   @BeforeAll
   static void setUpBeforeClass() throws Exception {
+  }
+
+  // Runs before each test.
+  @BeforeEach
+  void setUp() throws Exception {
     testValue1Name = "Dresden";
     testValue1Residents = 556780;
     testValue2Name = "Leipzig";
     testValue2Residents = 593145;
   }
 
-  @AfterAll
-  static void tearDownAfterClass() throws Exception {
-  }
-
-  @BeforeEach
-  void setUp() throws Exception {
-  }
-
+  // Runs after each test.
   @AfterEach
   void tearDown() throws Exception {
   }
 
-  @DisplayName("T01: Add correct town name")
-  @Test
-  void test1_TownName() {
-    String message;
-    Town t = new Town(testValue1Name, testValue1Residents);
-
-    // assert 1 - null
-    message = "name is null";
-    assertThrows(IllegalArgumentException.class, () -> new Town(null, 0), message + " (constructor)");
-    assertThrows(IllegalArgumentException.class, () -> t.setName(null), message + " (set)");
-
-    // assert 2 - empty
-    message = "name is empty";
-    assertThrows(IllegalArgumentException.class, () -> new Town("", 0), message + " (constructor)");
-    assertThrows(IllegalArgumentException.class, () -> t.setName(""), message + " (set)");
-
-    // assert 3 - only white spaces
-    message = "name contains only spaces";
-    assertThrows(IllegalArgumentException.class, () -> new Town("  ", 0), message + " (constructor)");
-    assertThrows(IllegalArgumentException.class, () -> t.setName("  "), message + " (set)");
+  // Runs once after all tests.
+  @AfterAll
+  static void tearDownAfterClass() throws Exception {
   }
 
-  @DisplayName("T02: Add correct town residents")
+  @DisplayName("T01: Constructor sets the town values")
   @Test
-  void test2_TownResidents() {
-    String message = "residents is less 0";
+  void constructorSetsValues() {
+    // Arrange
+    Town town = new Town(testValue1Name, testValue1Residents);
 
-    // assert 1 - less 0 -> IllegalArgumentException
-    assertThrows(IllegalArgumentException.class, () -> new Town(testValue1Name,
-        -1), message + " (constructor)");
+    // Act & Assert
+    assertEquals(testValue1Name, town.getName());
+    assertEquals(testValue1Residents, town.getResidents());
+  }
+
+  @DisplayName("T02: `setName()` updates the name")
+  @Test
+  void setNameUpdatesName() {
+    // Arrange
+    Town town = new Town(testValue1Name, testValue1Residents);
+
+    // Act
+    town.setName(testValue2Name);
+
+    // Assert
+    assertEquals(testValue2Name, town.getName());
+  }
+
+  @DisplayName("T03: `setResidents()` updates the number of residents")
+  @Test
+  void setResidentsUpdatesResidents() {
+    // Arrange
+    Town town = new Town(testValue1Name, testValue1Residents);
+
+    // Act
+    town.setResidents(testValue2Residents);
+
+    // Assert
+    assertEquals(testValue2Residents, town.getResidents());
+  }
+
+  @DisplayName("T04: Constructor rejects invalid name")
+  @Test
+  void constructorRejectsInvalidName() {
+    // Act & Assert
+    for (String name : INVALID_NAMES) {
+      assertThrows(IllegalArgumentException.class, () -> {
+        new Town(name, testValue1Residents);
+      });
+    }
+  }
+
+  @DisplayName("T05: `setName()` rejects invalid name")
+  @Test
+  void setNameRejectsInvalidName() {
+    // Arrange
+    Town town = new Town(testValue1Name, testValue1Residents);
+
+    // Act & Assert
+    for (String name : INVALID_NAMES) {
+      assertThrows(IllegalArgumentException.class, () -> {
+        town.setName(name);
+      });
+    }
+  }
+
+  @DisplayName("T06: Constructor rejects negative residents")
+  @Test
+  void constructorRejectsNegativeResidents() {
+    // Act & Assert
     assertThrows(IllegalArgumentException.class, () -> {
-      Town t = new Town(testValue1Name, testValue1Residents);
-      t.setResidents(-2);
-    }, message + " (set)");
-
-    /*
-     * // assert 1 - less 0 -> 0
-     * Town t = new Town(testValue1Name, -1);
-     * assertFalse(t.getResidents() < 0, message + " (constructor)");
-     * t = new Town(testValue1Name, testValue1Residents);
-     * t.setResidents(-2);
-     * assertFalse(t.getResidents() < 0, message + " (set)");
-     */
+      new Town(testValue1Name, -1);
+    });
   }
 
-  @DisplayName("T03: Get correct town name")
+  @DisplayName("T07: `setResidents()` rejects negative residents")
   @Test
-  void test3_getNameFunction() {
-    // assert 1 - constructor equals get
-    Town t = new Town(testValue1Name, testValue1Residents);
-    assertEquals(testValue1Residents, t.getResidents(), "Output not match input");
+  void setResidentsRejectsNegativeResidents() {
+    // Arrange
+    Town town = new Town(testValue1Name, testValue1Residents);
 
-    // assert 2 - set equals get
-    t.setResidents(testValue2Residents);
-    assertEquals(testValue2Residents, t.getResidents(), "Output not match input");
+    // Act & Assert
+    assertThrows(IllegalArgumentException.class, () -> {
+      town.setResidents(-1);
+    });
   }
 
-  @DisplayName("T04: Get correct town residents")
+  @DisplayName("T08: `getInfo()` returns human-readable town information")
   @Test
-  void test4_getResidentsFunction() {
-    // assert 1 - constructor equals get
-    Town t = new Town(testValue1Name, testValue1Residents);
-    assertEquals(testValue1Name, t.getName(), "Output not match input");
+  void getInfoReturnsHumanReadableTownInformation() {
+    // Arrange
+    Town town = new Town(testValue1Name, testValue1Residents);
+    String expected = "%s has %d residents.".formatted(testValue1Name, testValue1Residents);
 
-    // assert 2 - set equals get
-    t.setName(testValue2Name);
-    assertEquals(testValue2Name, t.getName(), "Output not match input");
+    // Act, Assert
+    assertEquals(expected, town.getInfo());
   }
 
-  @DisplayName("T05: Get correct town information")
+  @DisplayName("T09: `toString()` returns object representation")
   @Test
-  void test5_getInfoFunction() {
-    // assert 1 - correct info string
-    Town t = new Town(testValue1Name, testValue1Residents);
-    String template = "The town " + t.getName() + " has " + t.getResidents() + " residents.";
-    assertEquals(template, t.getInfo(), "Output not match template");
-  }
+  void toStringReturnsObjectRepresentation() {
+    // Arrange
+    Town town = new Town(testValue1Name, testValue1Residents);
+    String expected = "Town('%s', %d)".formatted(testValue1Name, testValue1Residents);
 
-  @DisplayName("T06: Get correct town as string")
-  @Test
-  void test6_toStringFunction() {
-    // assert 1 - correct toString
-    Town t = new Town(testValue1Name, testValue1Residents);
-    String template = "Town('" + testValue1Name + "', " + testValue1Residents + ")";
-    assertEquals(template, t.toString(), "Output not match template");
+    // Act, Assert
+    assertEquals(expected, town.toString());
   }
-
 }
