@@ -24,39 +24,39 @@ class TestTown(unittest.TestCase):
     @classmethod
     def tearDownClass(cls): ...
 
-    def test_town_constructor_sets_and_gets_correct_values(self):
-        """T01: Constructor sets and gets correct values."""
+    def test_town_constructor_sets_values(self):
+        """T01: Constructor sets the town values."""
 
         # Arrange
-        t = Town(self.test_value1_name, self.test_value1_residents)
+        town = Town(self.test_value1_name, self.test_value1_residents)
 
         # Act & Assert
-        self.assertEqual(t.name, self.test_value1_name)
-        self.assertEqual(t.residents, self.test_value1_residents)
+        self.assertEqual(self.test_value1_name, town.name)
+        self.assertEqual(self.test_value1_residents, town.residents)
 
-    def test_town_name_setter_sets_and_gets_correct_value(self):
-        """T02: Name setter sets and gets correct value."""
-
-        # Arrange
-        t = Town(self.test_value1_name, self.test_value1_residents)
-
-        # Act
-        t.name = self.test_value2_name
-
-        # Assert
-        self.assertEqual(t.name, self.test_value2_name)
-
-    def test_town_residents_setter_sets_and_gets_correct_value(self):
-        """T03: Residents setter sets and gets correct value."""
+    def test_town_name_setter_updates_name(self):
+        """T02: Name setter updates the town name."""
 
         # Arrange
-        t = Town(self.test_value1_name, self.test_value1_residents)
+        town = Town(self.test_value1_name, self.test_value1_residents)
 
         # Act
-        t.residents = self.test_value2_residents
+        town.name = self.test_value2_name
 
         # Assert
-        self.assertEqual(t.residents, self.test_value2_residents)
+        self.assertEqual(self.test_value2_name, town.name)
+
+    def test_town_residents_setter_updates_residents(self):
+        """T03: Residents setter updates the town residents."""
+
+        # Arrange
+        town = Town(self.test_value1_name, self.test_value1_residents)
+
+        # Act
+        town.residents = self.test_value2_residents
+
+        # Assert
+        self.assertEqual(self.test_value2_residents, town.residents)
 
     def test_town_constructor_rejects_invalid_name(self):
         """
@@ -80,12 +80,12 @@ class TestTown(unittest.TestCase):
         """
 
         # Arrange
-        t = Town(self.test_value1_name, self.test_value1_residents)
+        town = Town(self.test_value1_name, self.test_value1_residents)
 
         # Act & Assert
         for name in self.INVALID_NAMES:
             with self.assertRaises(ValueError):
-                t.name = name
+                town.name = name
 
     def test_town_constructor_rejects_negative_residents(self):
         """T06: Constructor rejects negative residents."""
@@ -98,33 +98,33 @@ class TestTown(unittest.TestCase):
         """T07: Setter rejects negative residents."""
 
         # Arrange
-        t = Town(self.test_value1_name, self.test_value1_residents)
+        town = Town(self.test_value1_name, self.test_value1_residents)
 
         # Act & Assert
         with self.assertRaises(ValueError):
-            t.residents = -1
+            town.residents = -1
 
     def test_town_str_returns_human_readable_string(self):
-        """T08: Get correct town as human readable string."""
+        """T08: `str()` returns human-readable string."""
 
         # Arrange
-        t = Town(self.test_value1_name, self.test_value1_residents)
+        town = Town(self.test_value1_name, self.test_value1_residents)
         expected = (
             f"{self.test_value1_name} has {self.test_value1_residents} residents."
         )
 
         # Act, Assert
-        self.assertEqual(str(t), expected)
+        self.assertEqual(expected, str(town))
 
     def test_town_repr_returns_object_representation(self):
-        """T09: Get correct town as object representation string."""
+        """T09: `repr()` returns object representation."""
 
         # Arrange
-        t = Town(self.test_value1_name, self.test_value1_residents)
+        town = Town(self.test_value1_name, self.test_value1_residents)
         expected = f"Town({self.test_value1_name!r}, {self.test_value1_residents!r})"
 
         # Act, Assert
-        self.assertEqual(repr(t), expected)
+        self.assertEqual(expected, repr(town))
 
 
 if __name__ == "__main__":

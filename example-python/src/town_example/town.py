@@ -37,7 +37,7 @@ class Town:
         self.__residents = value
 
     def __str__(self):
-        """Returns a human readable string of the object."""
+        """Returns a human-readable string of the object."""
         return f"{self.name} has {self.residents} residents."
 
     def __repr__(self):
