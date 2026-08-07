@@ -20,8 +20,9 @@ einer `Town`-Klasse mit zugehörigen Unit-Tests und stammen aus dem Praktikum
 
 ## Übungsprojekte
 
-Die Beispielprojekte für **Java** und **Python** befinden sich in getrennten
-Verzeichnissen und enthalten jeweils eine `README.md`-Datei mit Informationen:
+Die folgenden Beispielprojekte zeigen die Umsetzung mit **Java** und
+**Python**. Jedes Projekt enthält eine eigene `README.md` mit Informationen zu
+Anforderungen, Ausführung und Tests.
 
 | Projekt                               | Beschreibung                                 |
 | ------------------------------------- | -------------------------------------------- |
