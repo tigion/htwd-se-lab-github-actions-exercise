@@ -31,13 +31,15 @@ class Town:
     def residents(self, value):
         if type(value) is not int:
             raise ValueError("Residents must be an integer.")
-
-        # FIX: Add non-negative residents validation.
+        if value < 0:
+            raise ValueError("Residents cannot be negative.")
 
         self.__residents = value
 
     def __str__(self):
         """Returns a human-readable string of the object."""
+
+        # FIX: Add pluralization and handle zero residents.
         return f"{self.name} has {self.residents} residents."
 
     def __repr__(self):

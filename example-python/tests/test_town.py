@@ -104,8 +104,28 @@ class TestTown(unittest.TestCase):
         with self.assertRaises(ValueError):
             town.residents = -1
 
-    def test_town_str_returns_human_readable_string(self):
-        """T08: `str()` returns human-readable string."""
+    def test_town_str_uses_no_residents_for_zero(self):
+        """T08: `str()` uses "no residents" for zero residents."""
+
+        # Arrange
+        town = Town(self.test_value1_name, 0)
+        expected = f"{self.test_value1_name} has no residents."
+
+        # Act, Assert
+        self.assertEqual(expected, str(town))
+
+    def test_town_str_uses_singular_for_one_resident(self):
+        """T09: `str()` uses singular form for one resident."""
+
+        # Arrange
+        town = Town(self.test_value1_name, 1)
+        expected = f"{self.test_value1_name} has 1 resident."
+
+        # Act, Assert
+        self.assertEqual(expected, str(town))
+
+    def test_town_str_uses_plural_for_multiple_residents(self):
+        """T10: `str()` uses plural form for multiple residents."""
 
         # Arrange
         town = Town(self.test_value1_name, self.test_value1_residents)
@@ -117,7 +137,7 @@ class TestTown(unittest.TestCase):
         self.assertEqual(expected, str(town))
 
     def test_town_repr_returns_object_representation(self):
-        """T09: `repr()` returns object representation."""
+        """T11: `repr()` returns object representation."""
 
         # Arrange
         town = Town(self.test_value1_name, self.test_value1_residents)
