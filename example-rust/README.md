@@ -26,11 +26,12 @@ unit testing with the built-in `#[test]` framework.
 
 ```txt
 example-rust
-├── Cargo.toml
 ├── src
 │   ├── main.rs
 │   └── town.rs
 ├── .gitignore
+├── Cargo.lock
+├── Cargo.toml
 └── README.md
 ```
 
