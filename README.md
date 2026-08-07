@@ -10,8 +10,8 @@ Enthalten sind einfache Anwendungen mit Unit-Tests in **Java**, **Python** und
 Unit-Tests und stammen aus dem Praktikum "Unit-Tests mit Java und Python".
 
 > [!WARNING]
-> Ein Test schlägt bewusst fehl, da dieser im Zuge der Aufgabenbearbeitung
-> angepasst wird.
+> Zwei Tests schlagen zunächst absichtlich fehl. Die enthaltenen Fehler werden
+> im Verlauf der Bearbeitung der Aufgaben behoben.
 
 ## Übungsprojekte
 
