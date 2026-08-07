@@ -151,8 +151,8 @@ residents = 556780
 town = Town(name, residents)
 
 # Assert
-self.assertEqual(town.name, name)
-self.assertEqual(town.residents, residents)
+self.assertEqual(name, town.name)
+self.assertEqual(residents, town.residents)
 ```
 
 ## Python Basics
