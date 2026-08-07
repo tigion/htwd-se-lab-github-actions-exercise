@@ -31,13 +31,14 @@ public class Town {
   }
 
   public void setResidents(int residents) {
-    // FIX: Add non-negative residents validation.
-
+    if (residents < 0)
+      throw new IllegalArgumentException("Residents cannot be negative.");
     this.residents = residents;
   }
 
   /** Returns human-readable town information. */
   public String getInfo() {
+    // FIX: Add pluralization and handle zero residents.
     return this.name + " has " + this.residents + " residents.";
   }
 

@@ -123,9 +123,31 @@ class TestTown {
     });
   }
 
-  @DisplayName("T08: `getInfo()` returns human-readable town information")
+  @DisplayName("T08: `getInfo()` uses no residents for zero")
   @Test
-  void getInfoReturnsHumanReadableTownInformation() {
+  void getInfoUsesNoResidentsForZero() {
+    // Arrange
+    Town town = new Town(testValue1Name, 0);
+    String expected = "%s has no residents.".formatted(testValue1Name);
+
+    // Act, Assert
+    assertEquals(expected, town.getInfo());
+  }
+
+  @DisplayName("T09: `getInfo()` uses singular for one resident")
+  @Test
+  void getInfoUsesSingularForOneResident() {
+    // Arrange
+    Town town = new Town(testValue1Name, 1);
+    String expected = "%s has 1 resident.".formatted(testValue1Name);
+
+    // Act, Assert
+    assertEquals(expected, town.getInfo());
+  }
+
+  @DisplayName("T10: `getInfo()` uses plural for multiple residents")
+  @Test
+  void getInfoUsesPluralForMultipleResidents() {
     // Arrange
     Town town = new Town(testValue1Name, testValue1Residents);
     String expected = "%s has %d residents.".formatted(testValue1Name, testValue1Residents);
@@ -134,7 +156,7 @@ class TestTown {
     assertEquals(expected, town.getInfo());
   }
 
-  @DisplayName("T09: `toString()` returns object representation")
+  @DisplayName("T11: `toString()` returns object representation")
   @Test
   void toStringReturnsObjectRepresentation() {
     // Arrange
