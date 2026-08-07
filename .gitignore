@@ -1,2 +1,6 @@
+# Virtual environments
+.venv/
+
+# Editor and operating system files
 *~
 .DS_Store
