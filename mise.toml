@@ -2,6 +2,7 @@
 java = "21.0"
 maven = "3.9"
 python = "3.14"
+rust = "latest"
 
 [env]
 _.python.venv = { path = ".venv", create = true }

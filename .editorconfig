@@ -27,3 +27,7 @@ indent_size = 4
 # Shell script
 [*.sh]
 switch_case_indent = true
+
+# Rust
+[*.rs]
+indent_size = 4
