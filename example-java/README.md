@@ -10,6 +10,7 @@ unit testing with `JUnit`.
 <!--toc:start-->
 
 - [Project Structure](#project-structure)
+- [Requirements](#requirements)
 - [Running the Project](#running-the-project)
   - [Run](#run)
   - [Test](#test)
@@ -55,6 +56,18 @@ example-java
 | `.gitignore`    | Specifies files and directories that should not be tracked by Git.                                                            |
 | `README.md`     | Contains project documentation and instructions.                                                                              |
 
+## Requirements
+
+- JDK **21+** — Compiles and runs the application and tests.
+- Maven **3.8+** — Manages dependencies and builds the project.
+
+Verify your installed versions:
+
+```sh
+java --version
+mvn --version
+```
+
 ## Running the Project
 
 ### Run
@@ -82,12 +95,6 @@ Dresden
 ```
 
 ### Test
-
-Check the Maven version:
-
-```sh
-mvn --version
-```
 
 Remove previously generated build artifacts:
 

@@ -10,6 +10,7 @@ unit testing with `unittest`.
 <!--toc:start-->
 
 - [Project Structure](#project-structure)
+- [Requirements](#requirements)
 - [Running the Project](#running-the-project)
   - [Setup](#setup)
   - [Run](#run)
@@ -51,6 +52,17 @@ example-python
 | `.gitignore`     | Specifies files and directories that should not be tracked by Git.                                                            |
 | `README.md`      | Contains project documentation and instructions.                                                                              |
 
+## Requirements
+
+- Python **3.12+** — Runs the application and tests (includes `pip`).
+
+Verify your installed versions:
+
+```sh
+python3 --version
+python3 -m pip --version
+```
+
 ## Running the Project
 
 ### Setup
@@ -74,12 +86,6 @@ Dresden
 ```
 
 ### Test
-
-- Display Python version:
-
-  ```sh
-  python3 --version
-  ```
 
 - Run automatically discovered tests:
 
