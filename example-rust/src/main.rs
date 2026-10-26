@@ -4,8 +4,9 @@ use town::Town;
 
 fn main() {
     let mut t = Town::new("Dresden", 556780).expect("invalid town values");
+
     println!("{}", t.info());
-    println!("{}", t);
+    println!("{t}");
     println!("{}", t.name());
     println!("{}", t.residents());
 
@@ -13,7 +14,8 @@ fn main() {
         .expect("invalid town name");
     t.set_residents(t.residents() + 1)
         .expect("invalid town residents");
-    println!("{}", t);
+
+    println!("{t}");
 }
 
 #[cfg(test)]

@@ -27,10 +27,8 @@ impl Town {
     /// Returns an error message if the name is empty or consists only of
     /// whitespace, or if the residents value is invalid.
     pub fn new(name: impl Into<String>, residents: u32) -> Result<Self, TownError> {
-        let name = name.into();
-
-        Self::validate_name(&name)?;
-        Self::validate_residents(residents)?;
+        let name = Self::validate_name(&name.into())?;
+        let residents = Self::validate_residents(residents)?;
 
         Ok(Self { name, residents })
     }
@@ -49,11 +47,10 @@ impl Town {
     ///
     /// # Errors
     ///
-    /// Returns an error message if the name is empty or consists only of whitespace.
+    /// Returns an error if the name is invalid.
     pub fn set_name(&mut self, name: impl Into<String>) -> Result<(), TownError> {
-        let name = name.into();
-        Self::validate_name(&name)?;
-        self.name = name.trim().to_string();
+        self.name = Self::validate_name(&name.into())?;
+
         Ok(())
     }
 
@@ -61,10 +58,10 @@ impl Town {
     ///
     /// # Errors
     ///
-    /// Returns an error if the residents value exceeds `MAX_RESIDENTS`.
+    /// Returns an error if the residents value is invalid.
     pub fn set_residents(&mut self, residents: u32) -> Result<(), TownError> {
-        Self::validate_residents(residents)?;
-        self.residents = residents;
+        self.residents = Self::validate_residents(residents)?;
+
         Ok(())
     }
 
@@ -74,20 +71,34 @@ impl Town {
         format!("{} has {} residents.", self.name, self.residents)
     }
 
-    fn validate_name(name: &str) -> Result<(), TownError> {
-        if name.trim().is_empty() {
-            Err(TownError::InvalidName)
-        } else {
-            Ok(())
+    /// Returns the validated town name if it is valid.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`TownError::InvalidName`] if the name is empty or consists only
+    /// of whitespace.
+    fn validate_name(name: &str) -> Result<String, TownError> {
+        let name = name.trim();
+
+        if name.is_empty() {
+            return Err(TownError::InvalidName);
         }
+
+        Ok(name.to_owned())
     }
 
-    fn validate_residents(residents: u32) -> Result<(), TownError> {
+    /// Returns the number of residents if it is valid.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`TownError::TooManyResidents`] if the number of residents
+    /// exceeds [`MAX_RESIDENTS`].
+    fn validate_residents(residents: u32) -> Result<u32, TownError> {
         if residents > MAX_RESIDENTS {
-            Err(TownError::TooManyResidents)
-        } else {
-            Ok(())
+            return Err(TownError::TooManyResidents);
         }
+
+        Ok(residents)
     }
 }
 
